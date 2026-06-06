@@ -13,8 +13,8 @@ PersonaSteering is a personalization model for transformer-based text generation
 ## Key Features & Architecture
 
 - **Dual-Stream Steering Vector Generation**: 
-  - **Stream A (Explicit/Demographic)**: The current query attends to the user's demographic information sequence to extract long-term preferences.
-  - **Stream B (Implicit/History)**: The current query attends to the user's historical profile records (using Cross-Attention) to extract task-relevant, short-term preferences.
+  - **Stream A (Trait/Demographic)**: The current query attends to the user's demographic information sequence to extract long-term preferences.
+  - **Stream B (Resdual/History)**: The current query attends to the user's historical profile records (using Cross-Attention) to extract task-relevant, short-term preferences.
   - **Adaptive Fusion Gate**: Dynamically weights and combines Stream A and Stream B to form the final user representation.
 - **Dynamic Steering via Activation Hooks**: Instead of simple static addition, the fused steering vector acts as a Query that dynamically attends to the frozen Decoder's hidden states (Key/Value) at a specified transformer layer. This produces a context-dependent delta that is injected directly into the residual stream.
 - **Two-Stage Training**:
@@ -28,7 +28,7 @@ This repository ships a **bundled LlamaFactory** tree with PersonaSteer training
 
 ---
 
-## Quick start (open source)
+## Quick start 
 
 ```bash
 git clone <your-repo-url> PersonaSteer
@@ -234,7 +234,7 @@ At generation time the script uses row-level `input`, `profile`, and `Demographi
 
 ---
 
-### Inference data format (output)
+### Inference data format 
 
 `eval_profile_steer.py` writes under `--output_dir`:
 
