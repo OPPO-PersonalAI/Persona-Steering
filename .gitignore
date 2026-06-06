@@ -1,0 +1,32 @@
+# Secrets and local env
+.env
+*.env.local
+
+# Data prep artifacts
+Datasets/logs/
+Datasets/data/
+*.bak
+*.tmp
+metrics.txt
+
+# Training outputs
+saves/
+output/
+wandb/
+swanlab/
+
+# Downloads
+downloaded_results/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

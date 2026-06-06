@@ -1,0 +1,10 @@
+# Evaluation stack (install after requirements.txt)
+torch>=2.4.0
+transformers>=4.46.0
+peft>=0.12.0
+accelerate>=0.34.0
+rouge-score
+nltk
+sacrebleu
+rank-bm25
+tqdm

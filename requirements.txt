@@ -1,0 +1,8 @@
+# PersonaSteer — install training stack from bundled LlamaFactory
+-e ./LlamaFactory
+
+# Data prep (Datasets/)
+openai>=1.0
+
+# Evaluation (Eval/) — install as needed
+# pip install -r requirements-eval.txt

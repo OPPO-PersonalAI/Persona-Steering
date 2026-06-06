@@ -1,0 +1,73 @@
+### ============================================
+### Custom Persona Steering Configuration (Dual-Stream)
+### ============================================
+
+### Model Configuration
+# Decoder (Frozen LLM)
+model_name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
+trust_remote_code: true
+freeze_decoder: true
+
+# User Encoder (Semantics Extractor)
+user_encoder_name: Qwen/Qwen3-Embedding-4B
+user_encoder_use_lora: true
+user_encoder_lora_r: 8
+user_encoder_lora_alpha: 16
+
+# Steering Configuration (Dual-Stream)
+steering_layer_idx: 19  # Target layer
+steering_coeff: 1.0     # Strength
+steering_mlp_activation: gelu
+steering_mlp_use_layer_norm: true
+# Fusion gate alpha clip: alpha = clamp(gate_output, fusion_alpha_min, fusion_alpha_max)
+# Prevents collapse to 0 or 1 (keeps both demographic and profile in use)
+fusion_alpha_min: 0.1
+fusion_alpha_max: 0.9
+
+### Training Stage (persona_profile_steering = dual-stream with profile + fusion alpha)
+stage: persona_profile_steering
+do_train: true
+do_eval: false
+
+### Dataset Configuration
+# Auto-detects task based on file path/content
+dataset: /path/to/LaMP/LaMP4/train_questions.json,/path/to/LaMP/LaMP5/train_questions.json,/path/to/longlamp/abstract_generation_temporal/train_questions.json,/path/to/longlamp/topic_writing_temporal/train_questions.json,/path/to/longlamp/product_review_writing_temporal/train_questions.json
+task: generation_abstract
+# Sequence Lengths
+max_user_length: 512    # For demographic info (Stream A)
+cutoff_len: 2048       # For decoder context length
+
+ignore_pad_token_for_loss: true
+
+auto_output_dir: true 
+### Training Hyperparameters
+output_dir: saves/persona_steering/dual_stream_run
+overwrite_output_dir: true
+learning_rate: 5e-5
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+per_device_train_batch_size: 2    # Small batch per device
+gradient_accumulation_steps: 16   # Large accumulation
+num_train_epochs: 3.0
+optim: adamw_torch
+weight_decay: 0.01
+bf16: true
+gradient_checkpointing: true
+dataloader_num_workers: 4
+ddp_timeout: 180000000
+max_samples_per_user: 10
+
+### Two-Stage Training
+use_two_stage_training: true
+mlp_only_steps: 500  # Stabilize the gate first
+
+### Logging
+logging_steps: 100
+save_steps: 500
+use_swanlab: false
+swanlab_api_key: null  # set use_swanlab: true and SWANLAB_API_KEY to enable
+report_to: none
+# mark_loss_as_nans: false
+
+profile_topk_prescreen: true
+profile_topk: 1
