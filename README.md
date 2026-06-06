@@ -1,6 +1,6 @@
-# PersonaSteer
+# PersonaSteering
 
-PersonaSteer is a personalization model for transformer-based text generation that conditions generation on a user's profile and task instruction to produce outputs aligned with individual users.
+PersonaSteering is a personalization model for transformer-based text generation that conditions generation on a user's profile and task instruction to produce outputs aligned with individual users.
 
 ## Method Overview
 
@@ -8,7 +8,7 @@ PersonaSteer is a personalization model for transformer-based text generation th
   <img src="assets/main_00.png" alt="PersonaSteer method diagram" width="90%">
 </p>
 
-*Method diagram: dual-stream user encoding (demographic information + profile history), adaptive fusion, and dynamic steering injected at a target transformer layer. [PDF version](assets/main.pdf)*
+*Method diagram: dual-stream user encoding (demographic information + profile history), adaptive fusion, and dynamic steering injected at a target transformer layer.
 
 ## Key Features & Architecture
 
