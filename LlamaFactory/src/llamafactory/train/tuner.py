@@ -35,7 +35,6 @@ from .ppo import run_ppo
 from .pt import run_pt
 from .rm import run_rm
 from .sft import run_sft
-from .persona_steering import run_persona_steering
 from .persona_profile_steering import run_persona_steering as run_persona_profile_steering
 from .trainer_utils import get_ray_trainer, get_swanlab_callback
 
