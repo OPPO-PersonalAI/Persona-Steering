@@ -2,7 +2,7 @@
 -e ./LlamaFactory
 
 # Data prep (Datasets/)
-openai>=1.0
+openai==2.41.0
 
 # Evaluation (Eval/) — install as needed
 # pip install -r requirements-eval.txt
